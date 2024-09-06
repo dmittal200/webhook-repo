@@ -2,10 +2,15 @@ from flask import Flask, render_template
 from flask import Flask
 from app.extensions import mongo
 from app.webhook.routes import webhook
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 app = Flask(__name__)
 
 # MongoDb intialization
+app.config['MONGO_URI'] = os.getenv('MONGO_URI')
 mongo.init_app(app)
 
 # Register Blueprints
